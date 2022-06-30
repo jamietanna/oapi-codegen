@@ -288,7 +288,8 @@ type ClientWithResponsesInterface interface {
 type ListThingsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]ThingWithID
+
+	JSON200 *[]ThingWithID
 }
 
 // Status returns HTTPResponse.Status
@@ -310,7 +311,8 @@ func (r ListThingsResponse) StatusCode() int {
 type AddThingResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON201      *[]ThingWithID
+
+	JSON201 *[]ThingWithID
 }
 
 // Status returns HTTPResponse.Status

@@ -111,9 +111,12 @@ type AdditionalPropertiesObject3 struct {
 
 // Has anonymous field which has additional properties
 type AdditionalPropertiesObject4 struct {
-	Inner                AdditionalPropertiesObject4_Inner `json:"inner"`
-	Name                 string                            `json:"name"`
-	AdditionalProperties map[string]interface{}            `json:"-"`
+	Inner struct {
+		Name                 string                 `json:"name"`
+		AdditionalProperties map[string]interface{} `json:"-"`
+	} `json:"inner"`
+	Name                 string                 `json:"name"`
+	AdditionalProperties map[string]interface{} `json:"-"`
 }
 
 // AdditionalPropertiesObject4_Inner defines model for AdditionalPropertiesObject4.Inner.
@@ -232,7 +235,9 @@ type OneOfObject22 = bool
 
 // inline OneOf
 type OneOfObject3 struct {
-	Union *OneOfObject3_Union `json:"union,omitempty"`
+	Union struct {
+		union json.RawMessage
+	} `json:"union,omitempty"`
 }
 
 // OneOfObject3_Union defines model for OneOfObject3.Union.

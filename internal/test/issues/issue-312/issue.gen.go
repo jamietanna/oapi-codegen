@@ -293,7 +293,8 @@ type ClientWithResponsesInterface interface {
 type GetPetResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Pet
+
+	JSON200 *Pet
 }
 
 // Status returns HTTPResponse.Status
@@ -315,8 +316,10 @@ func (r GetPetResponse) StatusCode() int {
 type ValidatePetsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]Pet
-	JSONDefault  *Error
+
+	JSON200 *[]Pet
+
+	JSONDefault *Error
 }
 
 // Status returns HTTPResponse.Status

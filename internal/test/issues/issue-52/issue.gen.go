@@ -200,7 +200,8 @@ type ClientWithResponsesInterface interface {
 type ExampleGetResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Document
+
+	JSON200 *Document
 }
 
 // Status returns HTTPResponse.Status

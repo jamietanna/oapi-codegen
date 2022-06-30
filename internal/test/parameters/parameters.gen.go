@@ -70,7 +70,7 @@ type GetCookieParams struct {
 // EnumParamsParams defines parameters for EnumParams.
 type EnumParamsParams struct {
 	// Parameter with enum values
-	EnumPathParam *EnumParamsParamsEnumPathParam `form:"enumPathParam,omitempty" json:"enumPathParam,omitempty"`
+	EnumPathParam int32 `form:"enumPathParam,omitempty" json:"enumPathParam,omitempty"`
 }
 
 // EnumParamsParamsEnumPathParam defines parameters for EnumParams.

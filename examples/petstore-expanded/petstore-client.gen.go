@@ -439,8 +439,10 @@ type ClientWithResponsesInterface interface {
 type FindPetsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]Pet
-	JSONDefault  *Error
+
+	JSON200 *[]Pet
+
+	JSONDefault *Error
 }
 
 // Status returns HTTPResponse.Status
@@ -462,8 +464,10 @@ func (r FindPetsResponse) StatusCode() int {
 type AddPetResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Pet
-	JSONDefault  *Error
+
+	JSON200 *Pet
+
+	JSONDefault *Error
 }
 
 // Status returns HTTPResponse.Status
@@ -485,7 +489,8 @@ func (r AddPetResponse) StatusCode() int {
 type DeletePetResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSONDefault  *Error
+
+	JSONDefault *Error
 }
 
 // Status returns HTTPResponse.Status
@@ -507,8 +512,10 @@ func (r DeletePetResponse) StatusCode() int {
 type FindPetByIDResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Pet
-	JSONDefault  *Error
+
+	JSON200 *Pet
+
+	JSONDefault *Error
 }
 
 // Status returns HTTPResponse.Status

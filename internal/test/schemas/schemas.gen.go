@@ -51,7 +51,7 @@ type CustomStringType = string
 
 // EnumInObjInArray defines model for EnumInObjInArray.
 type EnumInObjInArray = []struct {
-	Val *EnumInObjInArrayVal `json:"val,omitempty"`
+	Val string `json:"val,omitempty"`
 }
 
 // EnumInObjInArrayVal defines model for EnumInObjInArray.Val.
@@ -661,7 +661,8 @@ type ClientWithResponsesInterface interface {
 type EnsureEverythingIsReferencedResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
+
+	JSON200 *struct {
 		AnyType1 *AnyType1 `json:"anyType1,omitempty"`
 
 		// AnyType2 represents any type.
@@ -691,10 +692,14 @@ func (r EnsureEverythingIsReferencedResponse) StatusCode() int {
 type Issue127Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *GenericObject
-	XML200       *GenericObject
-	YAML200      *GenericObject
-	JSONDefault  *GenericObject
+
+	JSON200 *GenericObject
+
+	XML200 *GenericObject
+
+	YAML200 *GenericObject
+
+	JSONDefault *GenericObject
 }
 
 // Status returns HTTPResponse.Status
@@ -779,7 +784,8 @@ func (r Issue30Response) StatusCode() int {
 type GetIssues375Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *EnumInObjInArray
+
+	JSON200 *EnumInObjInArray
 }
 
 // Status returns HTTPResponse.Status

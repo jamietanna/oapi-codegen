@@ -839,7 +839,8 @@ type ClientWithResponsesInterface interface {
 type JSONExampleResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Example
+
+	JSON200 *Example
 }
 
 // Status returns HTTPResponse.Status
@@ -882,7 +883,8 @@ func (r MultipartExampleResponse) StatusCode() int {
 type MultipleRequestAndResponseTypesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Example
+
+	JSON200 *Example
 }
 
 // Status returns HTTPResponse.Status
@@ -904,7 +906,8 @@ func (r MultipleRequestAndResponseTypesResponse) StatusCode() int {
 type ReusableResponsesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Example
+
+	JSON200 *Example
 }
 
 // Status returns HTTPResponse.Status
@@ -1010,7 +1013,8 @@ func (r URLEncodedExampleResponse) StatusCode() int {
 type HeadersExampleResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Example
+
+	JSON200 *Example
 }
 
 // Status returns HTTPResponse.Status
