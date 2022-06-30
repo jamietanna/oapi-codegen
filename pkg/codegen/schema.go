@@ -580,7 +580,16 @@ func GenFieldsFromProperties(props []Property) []string {
 			}
 		}
 
-		field += fmt.Sprintf("    %s %s", goFieldName, p.GoTypeDef())
+		if p.Schema.AdditionalTypes == nil {
+			field += fmt.Sprintf("    %s %s", goFieldName, p.GoTypeDef())
+		} else {
+			for _, td := range p.Schema.AdditionalTypes {
+				if p.Schema.TypeDecl() == td.TypeName {
+					out, _ := GenerateGoSchema(p.Schema.OAPISchema.NewRef(), nil)
+					field += fmt.Sprintf("    %s %s", goFieldName, out.GoType)
+				}
+			}
+		}
 
 		// Support x-omitempty
 		overrideOmitEmpty := true

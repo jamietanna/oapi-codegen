@@ -46,7 +46,11 @@ type {{genResponseTypeName $opid | ucFirst}} struct {
     Body         []byte
 	HTTPResponse *http.Response
     {{- range getResponseTypeDefinitions .}}
-    {{.TypeName}} *{{.Schema.TypeDecl}}
+    {{ if .Schema.IsRef }}
+      {{.TypeName}} *{{.Schema.TypeDecl}}
+    {{ else }}
+      {{.TypeName}} *{{.Schema.GoType}}
+    {{ end }}
     {{- end}}
 }
 
