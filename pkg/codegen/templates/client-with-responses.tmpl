@@ -45,13 +45,13 @@ type ClientWithResponsesInterface interface {
 type {{genResponseTypeName $opid | ucFirst}} struct {
     Body         []byte
 	HTTPResponse *http.Response
-    {{- range getResponseTypeDefinitions .}}
-    {{ if .Schema.IsRef }}
+    {{ range getResponseTypeDefinitions .}}
+    {{- if .Schema.IsRef }}
       {{.TypeName}} *{{.Schema.TypeDecl}}
-    {{ else }}
+    {{- else }}
       {{.TypeName}} *{{.Schema.GoType}}
     {{ end }}
-    {{- end}}
+    {{ end }}
 }
 
 // Status returns HTTPResponse.Status
