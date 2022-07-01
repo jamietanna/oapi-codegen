@@ -349,6 +349,72 @@ type RenamedResponseObject struct {
 	Field SchemaObject `json:"Field"`
 }
 
+// JSON200 defines model for .
+type JSON200 struct {
+	// simple anyOf case
+	AnyOf1 *AnyOfObject1 `json:"anyOf1,omitempty"`
+
+	// Has additional properties with schema for dictionaries
+	Five *AdditionalPropertiesObject5 `json:"five,omitempty"`
+
+	// Has anonymous field which has additional properties
+	Four      *AdditionalPropertiesObject4 `json:"four,omitempty"`
+	JsonField *ObjectWithJsonField         `json:"jsonField,omitempty"`
+
+	// Has additional properties of type int
+	One *AdditionalPropertiesObject1 `json:"one,omitempty"`
+
+	// oneOf with references and no disciminator
+	OneOf1 *OneOfObject1 `json:"oneOf1,omitempty"`
+
+	// fixed properties, variable required - will compile, but not much sense
+	OneOf10 *OneOfObject10 `json:"oneOf10,omitempty"`
+
+	// additional properties of oneOf
+	OneOf11 *OneOfObject11 `json:"oneOf11,omitempty"`
+
+	// allOf of oneOfs
+	OneOf12 *OneOfObject12 `json:"oneOf12,omitempty"`
+
+	// oneOf with inline elements
+	OneOf2 *OneOfObject2 `json:"oneOf2,omitempty"`
+
+	// inline OneOf
+	OneOf3 *OneOfObject3 `json:"oneOf3,omitempty"`
+
+	// oneOf plus fixed type - custom marshaling/unmarshaling
+	OneOf4 *OneOfObject4 `json:"oneOf4,omitempty"`
+
+	// oneOf with disciminator but no mapping
+	OneOf5 *OneOfObject5 `json:"oneOf5,omitempty"`
+
+	// oneOf with discriminator and mapping
+	OneOf6 *OneOfObject6 `json:"oneOf6,omitempty"`
+
+	// array of oneOf
+	OneOf7 *OneOfObject7 `json:"oneOf7,omitempty"`
+
+	// oneOf with fixed properties
+	OneOf8 *OneOfObject8 `json:"oneOf8,omitempty"`
+
+	// oneOf with fixed descriminator
+	OneOf9 *OneOfObject9 `json:"oneOf9,omitempty"`
+
+	// Array of object with additional properties
+	Six *AdditionalPropertiesObject6 `json:"six,omitempty"`
+
+	// Allows any additional property
+	Three *AdditionalPropertiesObject3 `json:"three,omitempty"`
+
+	// Does not allow additional properties
+	Two *AdditionalPropertiesObject2 `json:"two,omitempty"`
+}
+
+// JSONDefault defines model for .
+type JSONDefault struct {
+	Field SchemaObject `json:"Field"`
+}
+
 // RenamedRequestBody defines model for RequestBody.
 type RenamedRequestBody struct {
 	Field SchemaObject `json:"Field"`

@@ -322,6 +322,44 @@ func Generate(spec *openapi3.T, opts Configuration) (string, error) {
 	}
 	return string(outBytes), nil
 }
+func f(a interface{}, swagger *openapi3.T) ([]TypeDefinition, error) { // TODO
+	definitions, err := OperationDefinitions(swagger)
+	if err != nil {
+		return nil, err
+	}
+
+	all := make([]TypeDefinition, 0)
+	for _, definition := range definitions {
+		fmt.Println(definition)
+		ds, err := definition.GetResponseTypeDefinitions()
+		if err != nil {
+			return nil, err
+		}
+		for _, d := range ds {
+			// fmt.Printf("d: %v\n", d)
+			// fmt.Println(d.Schema.IsRef())
+			// fmt.Printf("d.Schema.GoType: %v\n", d.Schema.GoType)
+
+			// d.Schema.GoType = GenStructFromSchema(d.Schema)
+			// fmt.Printf("d.Schema.GoType: %v\n", d.Schema.GoType)
+
+			// b, _ := json.Marshal(d)
+			// fmt.Println(string(b))
+			fmt.Println(d.Schema.AdditionalTypes)
+			for _, td := range d.Schema.AdditionalTypes {
+				all = append(all, td)
+			}
+
+			// TODO: convert the
+			// all = append(all, TypeDefinition{
+			// 	TypeName: d.TypeName,
+			// 	JsonName: d.JsonName,
+			// 	Schema:   d.Schema,
+			// })
+		}
+	}
+	return all, nil
+}
 
 func GenerateTypeDefinitions(t *template.Template, swagger *openapi3.T, ops []OperationDefinition, excludeSchemas []string) (string, error) {
 	schemaTypes, err := GenerateTypesForSchemas(t, swagger.Components.Schemas, excludeSchemas)
@@ -340,6 +378,12 @@ func GenerateTypeDefinitions(t *template.Template, swagger *openapi3.T, ops []Op
 		return "", fmt.Errorf("error generating Go types for component responses: %w", err)
 	}
 	allTypes = append(allTypes, responseTypes...)
+
+	responseTypeDefinitions, err := f(t, swagger)
+	if err != nil {
+		return "", fmt.Errorf("error generating Go types for rTDs: %w", err)
+	}
+	allTypes = append(allTypes, responseTypeDefinitions...)
 
 	bodyTypes, err := GenerateTypesForRequestBodies(t, swagger.Components.RequestBodies)
 	if err != nil {

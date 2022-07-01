@@ -91,6 +91,9 @@ type SimpleResponse struct {
 	Name string `json:"name"`
 }
 
+// JSON200 defines model for .
+type JSON200 = EveryTypeOptional
+
 // GetWithArgsParams defines parameters for GetWithArgs.
 type GetWithArgsParams struct {
 	// An optional query argument

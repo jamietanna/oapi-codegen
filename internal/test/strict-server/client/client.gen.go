@@ -25,6 +25,9 @@ type Example struct {
 // Reusableresponse defines model for reusableresponse.
 type Reusableresponse = Example
 
+// JSON200 defines model for .
+type JSON200 = Example
+
 // MultipleRequestAndResponseTypesTextBody defines parameters for MultipleRequestAndResponseTypes.
 type MultipleRequestAndResponseTypesTextBody = string
 
