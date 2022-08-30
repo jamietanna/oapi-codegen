@@ -12,7 +12,6 @@ import (
 	"os"
 
 	api "github.com/deepmap/oapi-codegen/examples/petstore-expanded/gorilla/api"
-	middleware "github.com/deepmap/oapi-codegen/pkg/chi-middleware"
 	"github.com/gorilla/mux"
 )
 
@@ -38,7 +37,7 @@ func main() {
 
 	// Use our validation middleware to check all requests against the
 	// OpenAPI schema.
-	r.Use(middleware.OapiRequestValidator(swagger))
+	//	r.Use(middleware.OapiRequestValidator(swagger))
 
 	// We now register our petStore above as the handler for the interface
 	api.HandlerFromMux(petStore, r)

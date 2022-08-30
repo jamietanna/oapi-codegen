@@ -12,6 +12,7 @@ import (
 	"net/url"
 	"path"
 	"strings"
+	"html/template"
 
 	"github.com/deepmap/oapi-codegen/pkg/runtime"
 	"github.com/getkin/kin-openapi/openapi3"
@@ -308,6 +309,61 @@ func HandlerWithOptions(si ServerInterface, options GorillaServerOptions) http.H
 	r.HandleFunc(options.BaseURL+"/pets/{id}", wrapper.DeletePet).Methods("DELETE")
 
 	r.HandleFunc(options.BaseURL+"/pets/{id}", wrapper.FindPetByID).Methods("GET")
+
+	r.HandleFunc(options.BaseURL+"/doc", func(w http.ResponseWriter, r *http.Request) {
+		doc, err := GetSwagger()
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		raw, err := doc.MarshalJSON()
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+
+		templateRaw :=		`
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>OpenAPI Specification for </title>
+
+    <script src="https://unpkg.com/@stoplight/elements/web-components.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@stoplight/elements/styles.min.css">
+    <style>
+      body {
+        font-family: ui-sans-serif, sans-serif;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+
+  <elements-api
+    id="docs"
+    router="hash"
+    layout="sidebar"
+    hideTryIt="true"
+    apiDescriptionDocument="{{ .SpecString }}"></elements-api>
+</html>
+`
+		tmpl := template.Must(template.New("").Parse(templateRaw ))
+
+		s := struct{
+			SpecString string
+		}{
+			SpecString: string(raw),
+		}
+
+		var b bytes.Buffer
+		err = tmpl.Execute(&b, s)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		w.Header().Add("content-type", "text/html")
+		w.Write([]byte(b.Bytes()))
+	}).Methods("GET")
 
 	return r
 }
