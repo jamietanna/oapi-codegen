@@ -15,7 +15,7 @@ require (
 	github.com/labstack/echo/v4 v4.7.2
 	github.com/lestrrat-go/blackmagic v1.0.1 // indirect
 	github.com/lestrrat-go/iter v1.0.2 // indirect
-	github.com/lestrrat-go/jwx v1.2.24
+	github.com/lestrrat-go/jwx v1.2.25
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/matryer/moq v0.2.7
 	github.com/mattn/go-colorable v0.1.12 // indirect
