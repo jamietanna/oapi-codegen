@@ -4,7 +4,7 @@ require (
 	github.com/cyberdelia/templates v0.0.0-20141128023046-ca7fffd4298c
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.0.1 // indirect
 	github.com/getkin/kin-openapi v0.94.0
-	github.com/gin-gonic/gin v1.7.7
+	github.com/gin-gonic/gin v1.8.1
 	github.com/go-chi/chi/v5 v5.0.7
 	github.com/go-openapi/swag v0.21.1 // indirect
 	github.com/go-playground/validator/v10 v10.11.0 // indirect
